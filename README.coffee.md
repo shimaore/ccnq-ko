@@ -24,8 +24,10 @@ module.exports = (require 'ccnq-ko').widget 'widget-tag', ->
   # any behavior
   # the fields of the constructor are already injected
   # the data object itself is available as {data}, {value} and {doc}
-  @html -> {div} = @teacup # teacup+databind template as `this`
-  @html ({div}) ->  # teacup+databind as parameter
+
+  @html -> {div} = @ # teacup+databind template as `this`
+  @html -> @div      # teacup+databind template as `this`
+  @html ({div}) ->   # teacup+databind as parameter
 ```
 
 Widget creation
@@ -130,9 +132,7 @@ This allows us to dynamically render Teacup template. This solves for example pr
 
         loadTemplate: (name, config, next) ->
           if config.teacup?
-            ctx =
-              teacup: teacup
-            html = teacup.render config.teacup.call ctx, teacup
+            html = teacup.render config.teacup.call teacup, teacup
             ko.components.defaultLoader.loadTemplate name, html, next
           else
             next null
