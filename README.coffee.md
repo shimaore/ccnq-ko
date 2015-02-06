@@ -76,6 +76,25 @@ The widget module returns a function that must be called with the instance of Kn
         ctx.ko = ko
         f.call ctx, ko
 
+If no `data` is provided the default behavior is to inject observables.
+FIXME: Replace with ko.mapping?
+
+        ctx._data ?= class DefaultData
+          constructor: (value) ->
+            if typeof value is 'object'
+              for own k,v of value
+                this[k] = ko.observable v
+            else
+              @value = ko.observable value
+
+If no `view` is provided the default behavior is to do nothing.
+
+        ctx._view ?= ->
+
+If no `html` is provided the default behavior is to output a comment that it wasn't provided.
+
+        ctx._html ?= -> "<!-- No html was provided in #{tag_name} -->"
+
         ko.components.register tag_name,
           viewModel: ({value,$root}) ->
             for own k,v of value
