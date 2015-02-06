@@ -1,6 +1,6 @@
 {
   "name": "ccnq-ko",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CCNQ Knockout Widget toolbox",
   "main": "index.js",
   "scripts": {
