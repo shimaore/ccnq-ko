@@ -54,6 +54,10 @@ The function provided to `widget` is called with a small DSL:
         class_name: class_name
         widget_name: widget_name
 
+      ctx._tag = (f) ->
+        {tag} = teacup
+        tag tag_name, params: "value:#{f},$root:$root"
+
 - `data` is the constructor for the data model; ideally it should work with `ko.toJS`
 
       ctx.data = ctx.constructor = (data) ->
@@ -104,15 +108,11 @@ If no `html` is provided the default behavior is to output a comment that it was
             ctx._view.call this, {value,$root,ko,data:value,doc:value}
           template: teacup: ctx._html
 
-        tag = (f) ->
-          {tag} = teacup
-          tag tag_name, params: "value:#{f},$root:$root"
-
         res = {tag_name,widget_name,class_name}
 
 and returns a new Teacup widget
 
-        res[widget_name] = tag
+        res[widget_name] = ctx._tag
 
 and the data-model constructor
 
