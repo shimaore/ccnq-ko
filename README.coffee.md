@@ -67,13 +67,14 @@ The function provided to `widget` is called with a small DSL:
       ctx.html = (html) ->
         ctx._html = html
 
-      f.call ctx
-
 The widget module returns a function that must be called with the instance of Knockout
 
       (ko) ->
 
         init ko
+
+        ctx.ko = ko
+        f.call ctx, ko
 
         ko.components.register tag_name,
           viewModel: ({value,$root}) ->
