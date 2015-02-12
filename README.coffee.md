@@ -99,12 +99,15 @@ If no `html` is provided the default behavior is to output a comment that it was
 
         ctx._html ?= -> "<!-- No html was provided in #{tag_name} -->"
 
-        ko.components.register tag_name,
-          viewModel: ({value,$root}) ->
-            for own k,v of value
-              this[k] = v
-            ctx._view.call this, {value,$root,ko,data:value,doc:value}
-          template: teacup: ctx._html
+        if ko.components.isRegistered tag_name
+          console.log "Not registering #{tag_name} twice."
+        else
+          ko.components.register tag_name,
+            viewModel: ({value,$root}) ->
+              for own k,v of value
+                this[k] = v
+              ctx._view.call this, {value,$root,ko,data:value,doc:value}
+            template: teacup: ctx._html
 
         res = {tag_name,widget_name,class_name}
 
