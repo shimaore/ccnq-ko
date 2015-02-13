@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Kow by shimaore</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Kow</h1>
+        <h2>Opinionated KnockOut(JS) Widget(s)</h2>
+        <a href="https://github.com/shimaore/kow" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="knockoutjs-widget" class="anchor" href="#knockoutjs-widget" aria-hidden="true"><span class="octicon octicon-link"></span></a>KnockOut(JS) Widget</h1>
+
+<p>An opinionated widget constructor for Browserify and CoffeeScript, using <a href="http://knockoutjs.com/">KnockOutJS</a> and <a href="http://goodeggs.github.io/teacup/">teacup</a>+<a href="https://github.com/shimaore/teacup-databind">databind</a>.</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>In the main application:</p>
+
+<div class="highlight highlight-coffeescript"><pre><span class="pl-v"><span class="pl-v">ko <span class="pl-k">=</span></span></span> <span class="pl-s3">require</span> <span class="pl-s1"><span class="pl-pds">'</span>knockout<span class="pl-pds">'</span></span>
+<span class="pl-k">{</span><span class="pl-v"><span class="pl-v">MyWidget</span></span>,<span class="pl-v"><span class="pl-v">my_widget</span></span><span class="pl-k">} =</span> (<span class="pl-s3">require</span> <span class="pl-s1"><span class="pl-pds">'</span>kow-my-widget<span class="pl-pds">'</span></span>) ko
+
+<span class="pl-c"># Later...</span>
+<span class="pl-v"><span class="pl-v">teacup <span class="pl-k">=</span></span></span> <span class="pl-s3">require</span> <span class="pl-s1"><span class="pl-pds">'</span>teacup<span class="pl-pds">'</span></span>
+$(<span class="pl-s1"><span class="pl-pds">'</span>content<span class="pl-pds">'</span></span>).<span class="pl-v"><span class="pl-v">html <span class="pl-k">=</span></span></span> teacup.render <span class="pl-st">-&gt;</span>
+  my_widget <span class="pl-s1"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>
+<span class="pl-c"># Provide default values for the fields.</span>
+<span class="pl-v"><span class="pl-v">values <span class="pl-k">=</span></span></span> <span class="pl-k">new</span> <span class="pl-en">MyWidget</span> <span class="pl-s1"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>
+ko.applyBindings <span class="pl-v"><span class="pl-v">foo:</span></span> values
+
+<span class="pl-c"># Later...</span>
+<span class="pl-v"><span class="pl-v">field_value <span class="pl-k">=</span></span></span> values.observable_field()</pre></div>
+
+<p>In <code>kow-my-widget</code>:</p>
+
+<div class="highlight highlight-coffeescript"><pre><span class="pl-v"><span class="pl-v">module.exports <span class="pl-k">=</span></span></span> (<span class="pl-s3">require</span> <span class="pl-s1"><span class="pl-pds">'</span>kow<span class="pl-pds">'</span></span>) <span class="pl-s1"><span class="pl-pds">'</span>my-widget<span class="pl-pds">'</span></span>, <span class="pl-st">-&gt;</span>
+
+  <span class="pl-c">## The parameter of @data becomes MyWidget.</span>
+  <span class="pl-c">## @constructor and @model are synonims for @data</span>
+  <span class="pl-c">## You might also provide a CoffeeScript class instead of a function.</span>
+  <span class="pl-vo">@data</span> <span class="pl-vpf">(value)</span> <span class="pl-st">-&gt;</span>
+    <span class="pl-vo">@observable_field</span> <span class="pl-k">=</span> <span class="pl-vo">@ko</span>.observable value
+
+  <span class="pl-vo">@view</span> <span class="pl-vpf">({$root,data})</span> <span class="pl-st">-&gt;</span>
+  <span class="pl-c">## the fields of the constructor are already injected in the data object</span>
+  <span class="pl-c">## the data object is available as {data}, {value} and {doc}</span>
+
+  <span class="pl-vo">@html</span> <span class="pl-vpf">({div,input})</span> <span class="pl-st">-&gt;</span>   <span class="pl-c"># teacup+databind as parameter</span>
+    div <span class="pl-s1"><span class="pl-pds">'</span>.layout<span class="pl-pds">'</span></span>, <span class="pl-st">-&gt;</span>
+      input <span class="pl-s1"><span class="pl-pds">'</span>.name<span class="pl-pds">'</span></span>, <span class="pl-st">-&gt;</span> <span class="pl-v"><span class="pl-v">bind:</span></span> <span class="pl-v"><span class="pl-v">value:</span></span> <span class="pl-s1"><span class="pl-pds">'</span>observable_field<span class="pl-pds">'</span></span></pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/shimaore/kow/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/shimaore/kow/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/shimaore/kow"></a> is maintained by <a href="https://github.com/shimaore">shimaore</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
