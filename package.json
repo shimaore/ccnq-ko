@@ -1,6 +1,6 @@
 {
   "name": "kow",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "KnockOut(JS) Widget",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,8 @@
     "url": "github.com/shimaore/kow"
   },
   "keywords": [
-    "Knockout", "KnockOutJS"
+    "Knockout",
+    "KnockOutJS"
   ],
   "author": "Stéphane Alnet <stephane@shimaore.net> (http://stephane.shimaore.net/)",
   "license": "Unlicense (http://unlicense.org/)",
