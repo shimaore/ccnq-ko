@@ -41,9 +41,7 @@ module.exports = (require 'kow') 'my-widget', ->
 
   @html ({div,input}) ->   # teacup+databind as parameter
     div '.layout', ->
-      input '.name', ->
-        bind:
-          value: 'observable_field'
+      input '.name', -> bind: value: 'observable_field'
 ```
 
 Widget creation
