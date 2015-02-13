@@ -142,8 +142,8 @@ Loaders for Knockout
 ====================
 
     init = (ko) ->
-      return if ko.__ccnq_init
-      ko.__ccnq_init = true
+      return if ko.__kow_init
+      ko.__kow_init = true
 
       loader =
 
