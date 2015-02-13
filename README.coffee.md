@@ -1,33 +1,3 @@
-Usage
-=====
-
-In the main application:
-
-```coffeescript
-ko = require 'knockout'
-{Widget,widget} = (require 'ccnq-ko-widget') ko
-html = ->
-  widget 'foo'
-ko.applyBindings foo: new Widget (...)
-```
-
-In the widget:
-
-```coffeescript
-module.exports = (require 'ccnq-ko').widget 'widget-tag', ->
-
-  # data-model/constructor
-  @data (value) -> @field = @ko.observable value
-  # @constructor is a synonim for @data
-
-  @view ({$root,data}) ->
-  # any behavior
-  # the fields of the constructor are already injected
-  # the data object itself is available as {data}, {value} and {doc}
-
-  @html ({div}) ->   # teacup+databind as parameter
-```
-
 Widget creation
 ===============
 
@@ -58,7 +28,7 @@ The function provided to `widget` is called with a small DSL:
 
 - `data` is the constructor for the data model; ideally it should work with `ko.toJS`
 
-      ctx.data = ctx.constructor = (data) ->
+      ctx.data = ctx.constructor = ctx.model = (data) ->
         ctx._data = data
 
 - `view` is the view model (behavior); the root of `this` is already populated with copies of the content of the object set by `data`

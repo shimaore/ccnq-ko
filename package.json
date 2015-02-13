@@ -1,7 +1,7 @@
 {
-  "name": "ccnq-ko",
+  "name": "kow",
   "version": "3.1.0",
-  "description": "CCNQ Knockout Widget toolbox",
+  "description": "KnockOut(JS) Widget",
   "main": "index.js",
   "scripts": {
     "prepublish": "coffee -c -p README.coffee.md > index.js",
@@ -10,18 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/shimaore/ccnq-ko"
+    "url": "github.com/shimaore/kow"
   },
   "keywords": [
-    "Knockout",
-    "CCNQ"
+    "Knockout", "KnockOutJS"
   ],
   "author": "Stéphane Alnet <stephane@shimaore.net> (http://stephane.shimaore.net/)",
   "license": "Unlicense (http://unlicense.org/)",
   "bugs": {
-    "url": "https://github.com/shimaore/ccnq-ko/issues"
+    "url": "https://github.com/shimaore/kow/issues"
   },
-  "homepage": "https://github.com/shimaore/ccnq-ko",
+  "homepage": "https://github.com/shimaore/kow",
   "dependencies": {
     "teacup": "^1.0.0",
     "teacup-databind": "^1.0.1"
